@@ -23,7 +23,7 @@ class ClickGui(val config: FileConfig, val color: Color? = null) : WindowScreen(
         MinecraftForge.EVENT_BUS.register(KeyBindHandler(this))
     }
 
-    fun addSection(section: Section) {
+    fun addSection(section: Section): Section {
         section.clickGui = this
         sections.add(section)
         window.addChild(section)
@@ -35,5 +35,7 @@ class ClickGui(val config: FileConfig, val color: Color? = null) : WindowScreen(
             comp.setY(x.pixel())
             comp.setX(y.pixel())
         }
+
+        return section
     }
 }

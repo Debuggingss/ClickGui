@@ -21,11 +21,13 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
 
     var clickGui: ClickGui? = null
 
-    fun addElement(element: Element<*>) {
+    fun addElement(element: Element<*>): Element<*> {
         element.clickGui = this.clickGui
         element.section = this
         elements.add(element)
         this.addChild(element)
+
+        return element
     }
 
     fun updateHeight(doSecond: Boolean = true) {

@@ -54,11 +54,13 @@ class SubSection(
         }
     }
 
-    fun addElement(element: Element<*>) {
+    fun addElement(element: Element<*>): Element<*> {
         element.clickGui = section?.clickGui
         element.section = section
         elements.add(element)
         this.addChild(element)
+
+        return element
     }
 
     fun updateHeight(updateParent: Boolean = false) {
