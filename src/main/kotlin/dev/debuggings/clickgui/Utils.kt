@@ -13,10 +13,10 @@ object Utils {
     }
 
     fun colorToHex(color: Color): String {
-        return (color.red.toString(16) +
-                color.green.toString(16) +
-                color.blue.toString(16) +
-                color.alpha.toString(16)).uppercase()
+        return (color.red.toString(16).padStart(2, '0') +
+                color.green.toString(16).padStart(2, '0') +
+                color.blue.toString(16).padStart(2, '0') +
+                color.alpha.toString(16).padStart(2, '0')).uppercase()
     }
 
     fun hexToColor(hexColor: String): Color {

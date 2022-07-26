@@ -7,7 +7,10 @@ An easy to use ClickGui library built with Elementa
 ```kt
 class ClickGuiConfig {
 
-    val clickGui = ClickGui(FileConfig.of("./config/mymod.toml"))
+    val clickGui = ClickGui(
+        FileConfig.of("./config/mymod.toml"),
+        // Color(255, 0, 0)                     // This determines the color of the gui, if it's null it will have a chroma wave effect
+    )
 
     private val section = Section("Section") sectionOf clickGui
 
@@ -100,3 +103,6 @@ config!!.clickGui.init()
 ```kt
 EssentialAPI.getGuiUtil().openScreen(MyMod.config?.clickGui)
 ```
+Here is the example in action:
+
+![example](https://i.debuggings.dev/WRMOYOtE.gif)
