@@ -48,7 +48,7 @@ class TestClickGui {
     ) elementOf subSection
 
     val select = SelectElement(
-        "Secure Toggle",
+        "Select",
         "Pog",
         arrayListOf("Hello", "World", "Pog")
     ) elementOf subSection

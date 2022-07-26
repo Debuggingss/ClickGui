@@ -91,12 +91,14 @@ class SelectElement(
             if (selectedOption > 0) selectedOption--
             value = options[selectedOption]
             valueText.setText(value)
+            saveValue()
         }
 
         rightIconText.onMouseClick {
             if (selectedOption < options.size - 1) selectedOption++
             value = options[selectedOption]
             valueText.setText(value)
+            saveValue()
         }
     }
 }

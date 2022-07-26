@@ -58,7 +58,7 @@ class ClickGuiConfig {
 
     // The select element allows you to select a specific string from an array and return it as a String
     val select = SelectElement(
-        "Secure Toggle",                        // Name
+        "Select",                               // Name
         "Pog",                                  // Default Value, must be in the options array
         arrayListOf("Hello", "World", "Pog")    // The options
     ) elementOf subSection
