@@ -1,8 +1,10 @@
 package com.example.examplemod
 
+import com.example.examplemod.dsl.ClickGuiConfig
 import gg.essential.api.EssentialAPI
 import gg.essential.api.commands.Command
 import gg.essential.api.commands.DefaultHandler
+import gg.essential.api.commands.SubCommand
 
 class TestCommand : Command("clickguidebug") {
 
@@ -11,5 +13,10 @@ class TestCommand : Command("clickguidebug") {
         val gui = TestClickGui()
         gui.clickGui.init()
         EssentialAPI.getGuiUtil().openScreen(gui.clickGui)
+    }
+
+    @SubCommand("dsl")
+    fun dslGui() {
+        EssentialAPI.getGuiUtil().openScreen(ClickGuiConfig)
     }
 }

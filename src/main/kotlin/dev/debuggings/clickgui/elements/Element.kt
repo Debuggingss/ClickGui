@@ -18,11 +18,11 @@ open class Element<T>(var value: T) : UIBlock(Colors.OFF) {
 
     open fun init() {}
 
-    infix fun elementOf(section: Section) = apply {
-        section.addElement(this)
-    }
-
-    infix fun elementOf(subSection: SubSection) = apply {
-        subSection.addElement(this)
+    infix fun elementOf(element: Any) = apply {
+        when (element) {
+            is Section -> element.addElement(this)
+            is SubSection -> element.addElement(this)
+            else -> throw IllegalArgumentException("element must be Section or SubSection")
+        }
     }
 }
