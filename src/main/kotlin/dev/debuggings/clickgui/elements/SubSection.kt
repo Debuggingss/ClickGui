@@ -22,7 +22,7 @@ class SubSection(
 
     var subSection: SubSection? = null
 
-    val elements: ArrayList<Element<*>> = ArrayList()
+    val elements = mutableListOf<Element<*>>()
 
     var boundKey: Int = Keyboard.KEY_NONE
     var keyPressed: Boolean = false
@@ -196,12 +196,14 @@ class SubSection(
         }
     }
 
-    infix fun subSectionOf(section: Section) = apply {
-        section.addElement(this)
-    }
-
-    infix fun subSectionOf(section: SubSection) = apply {
-        this.subSection = section
-        section.addElement(this)
+    infix fun subSectionOf(section: Any) = apply {
+        when (section) {
+            is Section -> section.addElement(this)
+            is SubSection -> {
+                this.subSection = section
+                section.addElement(this)
+            }
+            else -> throw IllegalArgumentException("section must be Section or SubSection")
+        }
     }
 }
