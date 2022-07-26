@@ -4,17 +4,20 @@ import dev.debuggings.clickgui.elements.*
 import dev.debuggings.clickgui.ClickGui
 import dev.debuggings.clickgui.Colors
 import gg.essential.elementa.dsl.toConstraint
+import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import java.awt.Color
 
 class ColorHandler(private val clickGui: ClickGui, private val color: Color? = null) {
 
+    private val mc = Minecraft.getMinecraft()
     private var colorRGB = 0F
 
     @SubscribeEvent
     fun onTick(event: TickEvent.ClientTickEvent) {
         if (event.phase != TickEvent.Phase.START) return
+        if (mc.currentScreen != clickGui) return
 
         colorRGB += 0.01F
 
