@@ -17,7 +17,6 @@ class KeyBindHandler(private val clickGui: ClickGui) {
     @SubscribeEvent
     fun onKeyInput(event: InputEvent.KeyInputEvent) {
         if (mc.thePlayer == null) return
-        if (mc.currentScreen != clickGui) return
 
         clickGui.sections.forEach { section ->
             section.elements.forEach innerLoop@ { element ->
