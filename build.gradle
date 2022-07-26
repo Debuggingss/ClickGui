@@ -64,10 +64,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly "gg.essential:essential-1.8.9-forge:1725"
+    compileOnly "gg.essential:essential-1.8.9-forge:2666"
     embed "gg.essential:loader-launchwrapper:1.1.3"
-    implementation "com.electronwill.night-config:toml:3.6.5"
-    embed "com.electronwill.night-config:toml:3.6.5"
+    embed(implementation("com.electronwill.night-config:toml:3.6.5"))
 }
 
 jar {
@@ -78,21 +77,6 @@ shadowJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     configurations = [project.configurations.embed]
     archiveClassifier.set('')
-
-    relocate("com.electronwill.nightconfig", "dev.debuggings.nightconfig")
-
-    manifest.attributes(
-            "TweakClass": "gg.essential.loader.stage0.EssentialSetupTweaker"
-    )
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    filesMatching('mcmod.info') {
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
 }
 
 reobfJar.dependsOn shadowJar
@@ -102,3 +86,5 @@ reobf {
         mappingType = 'SEARGE'
     }
 }
+
+// TODO: Exclude com/example/examplemod from the jar

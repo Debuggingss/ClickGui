@@ -23,6 +23,7 @@ class SliderElement(
 
     override fun loadValue() {
         value = clickGui!!.config.get<Int>("${section?.name}.$name") ?: defaultValue
+        sliderBox.setX(((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel())
         valueText.setText(value.toString())
     }
 
@@ -53,7 +54,7 @@ class SliderElement(
     } childOf this
 
     private val sliderBox = UIRoundedRectangle(3F).constrain {
-        x = ((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel()
+        x = 3.pixel()
         y = 11.pixel()
         width = 4.pixel()
         height = 8.pixel()

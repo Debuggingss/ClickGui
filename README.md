@@ -78,7 +78,7 @@ class ClickGuiConfig {
     val textInput = TextInputElement(
         "Text Input",                           // Name
         "I am a text input"                     // Default Value
-    )
+    ) elementOf subSection
     
     // The toggle element is just a switch
     val toggle = ToggleElement(

@@ -24,6 +24,7 @@ class DecimalSliderElement(
 
     override fun loadValue() {
         value = clickGui!!.config.get<Double>("${section?.name}.$name")?.toFloat() ?: defaultValue
+        sliderBox.setX(((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel())
         valueText.setText(value.toString())
     }
 
@@ -54,7 +55,7 @@ class DecimalSliderElement(
     } childOf this
 
     private val sliderBox = UIRoundedRectangle(3F).constrain {
-        x = ((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel()
+        x = 3.pixel()
         y = 11.pixel()
         width = 4.pixel()
         height = 8.pixel()
