@@ -77,6 +77,8 @@ shadowJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     configurations = [project.configurations.embed]
     archiveClassifier.set('')
+
+    exclude("com/example/examplemod/**")
 }
 
 reobfJar.dependsOn shadowJar
@@ -86,5 +88,3 @@ reobf {
         mappingType = 'SEARGE'
     }
 }
-
-// TODO: Exclude com/example/examplemod from the jar
