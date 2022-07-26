@@ -13,7 +13,7 @@ class ClickGui(val config: FileConfig, val color: Color? = null) : WindowScreen(
 
     val sections: ArrayList<Section> = ArrayList()
 
-    init {
+    fun init() {
         config.load()
         sections.forEach {
             it.init()
