@@ -29,7 +29,7 @@ class ColorHandler(private val clickGui: ClickGui, private val color: Color? = n
     }
 
     private fun handle(index: Int, element: Element<*>) {
-        if (element is SeparatorElement) return
+        if (element is DividerElement) return
 
         if (element is SubSection && element.elements.size > 0) {
             element.elements.forEachIndexed(::handle)

@@ -2,30 +2,29 @@ package com.example.examplemod.dsl
 
 import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.ClickGui
-import dev.debuggings.clickgui.elements.ButtonElement
 import dev.debuggings.clickgui.elements.SecureToggleElement
 import gg.essential.universal.UChat
 import java.awt.Color
 
-object ClickGuiConfig : ClickGui(FileConfig.of("./config/dsl_gui.toml")) {
-    lateinit var toggleElement: SecureToggleElement
+object TestDslClickGui : ClickGui(FileConfig.of("./config/dsl_gui.toml")) {
+    lateinit var secureToggle: SecureToggleElement
 
     init {
         section("Section") {
             subsection("Sub Section :o") {
                 button("Super deeply nested button") {
-                    UChat.chat("ToggleElement is now ${toggleElement.value}")
+                    UChat.chat("Secure Toggle Element is now ${secureToggle.value}")
                 }
 
                 colorPicker("Color Picker", Color(255, 0, 0))
 
                 decimalSlider("Decimal Slider", 0.1f, 10f, 2f)
 
-                this@ClickGuiConfig.toggleElement = secureToggle("Secure Toggle", false)
+                this@TestDslClickGui.secureToggle = secureToggle("Secure Toggle", false)
 
                 selector("Selector", "Pog", arrayListOf("Hello", "World", "Pog"))
 
-                separator("Separator")
+                divider("Separator")
 
                 textInput("Text Input", "I am a text input")
 

@@ -1,6 +1,6 @@
 package com.example.examplemod
 
-import com.example.examplemod.dsl.ClickGuiConfig
+import com.example.examplemod.dsl.TestDslClickGui
 import gg.essential.api.EssentialAPI
 import gg.essential.api.commands.Command
 import gg.essential.api.commands.DefaultHandler
@@ -17,6 +17,6 @@ class TestCommand : Command("clickguidebug") {
 
     @SubCommand("dsl")
     fun dslGui() {
-        EssentialAPI.getGuiUtil().openScreen(ClickGuiConfig)
+        EssentialAPI.getGuiUtil().openScreen(TestDslClickGui)
     }
 }

@@ -8,23 +8,23 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.elementa.effects.ScissorEffect
 
-class SeparatorElement(name: String) : Element<String>(name, "what the fuck did you expect?") {
+class DividerElement(name: String? = null) : Element<String>("", "") {
+
+    fun setHeight(height: Number) = constrain {
+        this.height = height.pixel()
+    }
 
     init {
         constrain {
-            x = 0.pixel()
-            y = 0.pixel()
-            width = 100.pixel()
-            height = 20.pixel()
             color = Colors.TITLE.toConstraint()
-
-            enableEffect(ScissorEffect())
         }
 
-        UIText(name).constrain {
-            x = 4.pixel()
-            y = 6.pixel()
-            color = Colors.OPTION_TEXT.toConstraint()
-        } childOf this
+        name?.let {
+            UIText(it).constrain {
+                x = 4.pixel()
+                y = 6.pixel()
+                color = Colors.OPTION_TEXT.toConstraint()
+            } childOf this
+        }
     }
 }

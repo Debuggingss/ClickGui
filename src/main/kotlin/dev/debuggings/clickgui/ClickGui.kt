@@ -87,8 +87,8 @@ open class ClickGui(val config: FileConfig, val color: Color? = null) : WindowSc
             return addElement(SelectElement(name, defaultValue, options))
         }
 
-        fun separator(name: String): SeparatorElement {
-            return addElement(SeparatorElement(name))
+        fun divider(name: String): DividerElement {
+            return addElement(DividerElement(name))
         }
 
         fun slider(name: String, minValue: Int, maxValue: Int, defaultValue: Int): SliderElement {
