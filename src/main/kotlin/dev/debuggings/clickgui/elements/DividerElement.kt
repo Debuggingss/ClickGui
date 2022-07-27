@@ -6,7 +6,6 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 
 class DividerElement(name: String? = null) : Element<String>("", "") {
 

@@ -78,17 +78,20 @@ class SelectElement(
         }
 
         leftIconText.onMouseClick {
-            if (selectedOption > 0) selectedOption--
-            value = options[selectedOption]
-            valueText.setText(value)
-            saveValue()
+            selectedOption--
+            cycleText()
         }
 
         rightIconText.onMouseClick {
-            if (selectedOption < options.size - 1) selectedOption++
-            value = options[selectedOption]
-            valueText.setText(value)
-            saveValue()
+            selectedOption++
+            cycleText()
         }
+    }
+
+    private fun cycleText() {
+        selectedOption %= options.size
+        value = options[selectedOption]
+        valueText.setText(value)
+        saveValue()
     }
 }
