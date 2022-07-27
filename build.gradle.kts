@@ -1,4 +1,5 @@
 plugins {
+    id("maven-publish")
     id("org.jetbrains.kotlin.jvm")
     id("gg.essential.multi-version")
     id("gg.essential.loom")
