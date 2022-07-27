@@ -49,3 +49,14 @@ tasks.jar {
         "TweakOrder" to "0",
     ))
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "dev.debuggings"
+            artifactId = "clickgui"
+
+            from(components["java"])
+        }
+    }
+}
