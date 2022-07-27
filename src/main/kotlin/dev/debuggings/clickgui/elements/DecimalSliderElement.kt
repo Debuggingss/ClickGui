@@ -10,11 +10,10 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 import kotlin.math.floor
 
 class DecimalSliderElement(
-    private val name: String,
+    name: String,
     private val minValue: Float,
     private val maxValue: Float,
     private val defaultValue: Float

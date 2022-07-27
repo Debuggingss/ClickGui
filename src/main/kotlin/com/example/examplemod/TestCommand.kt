@@ -1,6 +1,5 @@
 package com.example.examplemod
 
-import com.example.examplemod.dsl.TestDslClickGui
 import gg.essential.api.EssentialAPI
 import gg.essential.api.commands.Command
 import gg.essential.api.commands.DefaultHandler

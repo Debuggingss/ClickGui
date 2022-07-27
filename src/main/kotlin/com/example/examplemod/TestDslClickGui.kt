@@ -1,4 +1,4 @@
-package com.example.examplemod.dsl
+package com.example.examplemod
 
 import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.ClickGui
@@ -6,8 +6,9 @@ import dev.debuggings.clickgui.elements.SecureToggleElement
 import gg.essential.universal.UChat
 import java.awt.Color
 
-object TestDslClickGui : ClickGui(FileConfig.of("./config/dsl_gui.toml")) {
-    lateinit var secureToggle: SecureToggleElement
+object TestDslClickGui : ClickGui(FileConfig.of("./config/testclickgui_dsl.toml")) {
+
+    private lateinit var secureToggle: SecureToggleElement
 
     init {
         section("Section") {
@@ -20,7 +21,7 @@ object TestDslClickGui : ClickGui(FileConfig.of("./config/dsl_gui.toml")) {
 
                 decimalSlider("Decimal Slider", 0.1f, 10f, 2f)
 
-                this@TestDslClickGui.secureToggle = secureToggle("Secure Toggle", false)
+                secureToggle = secureToggle("Secure Toggle", false)
 
                 selector("Selector", "Pog", arrayListOf("Hello", "World", "Pog"))
 

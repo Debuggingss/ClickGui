@@ -9,7 +9,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
 class SelectElement(
-    private val name: String,
+    name: String,
     private val defaultValue: String,
     private val options: ArrayList<String>
 ) : Element<String>(name, defaultValue) {

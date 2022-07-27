@@ -4,7 +4,6 @@ import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.ClickGui
 import dev.debuggings.clickgui.Section
 import dev.debuggings.clickgui.elements.*
-import gg.essential.elementa.dsl.pixel
 import gg.essential.universal.UChat
 import java.awt.Color
 

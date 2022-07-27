@@ -9,10 +9,9 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 
 class TextInputElement(
-    private val name: String,
+    name: String,
     private val defaultValue: String
 ) : Element<String>(name, defaultValue) {
 

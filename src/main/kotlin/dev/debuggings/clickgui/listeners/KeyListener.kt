@@ -15,6 +15,7 @@ open class KeyListener<T>(
     defaultValue: T,
     val allowBinding: Boolean,
 ) : Element<T>(name, defaultValue) {
+
     private var keyInputMode: Boolean = false
 
     var boundKey: Int = Keyboard.KEY_NONE

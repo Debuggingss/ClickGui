@@ -11,11 +11,10 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 import java.awt.Color
 
 class ColorPickerElement(
-    private val name: String,
+    name: String,
     private val defaultValue: Color
 ) : Element<Color>(name, defaultValue) {
 
