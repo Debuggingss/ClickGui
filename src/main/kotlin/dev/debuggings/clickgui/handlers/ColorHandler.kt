@@ -4,14 +4,14 @@ import dev.debuggings.clickgui.elements.*
 import dev.debuggings.clickgui.ClickGui
 import dev.debuggings.clickgui.Colors
 import gg.essential.elementa.dsl.toConstraint
-import net.minecraft.client.Minecraft
+import gg.essential.universal.UMinecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import java.awt.Color
 
 class ColorHandler(private val clickGui: ClickGui, private val color: Color? = null) {
 
-    private val mc = Minecraft.getMinecraft()
+    private val mc = UMinecraft.getMinecraft()
     private var colorRGB = 0F
 
     @SubscribeEvent

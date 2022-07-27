@@ -8,7 +8,7 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import org.lwjgl.input.Keyboard
+import gg.essential.universal.UKeyboard
 
 class ButtonElement(
     name: String,
@@ -18,8 +18,8 @@ class ButtonElement(
 
     override fun loadValue() {
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: Keyboard.KEY_NONE
-            boundKeyText.setText(Keyboard.getKeyName(boundKey))
+            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: UKeyboard.KEY_NONE
+            boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
         }
     }
 
@@ -40,7 +40,7 @@ class ButtonElement(
         }
 
         onMouseClick { event ->
-            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && allowBinding) {
+            if (UKeyboard.isKeyDown(UKeyboard.KEY_LSHIFT) && allowBinding) {
                 listen(event)
             } else {
                 function()

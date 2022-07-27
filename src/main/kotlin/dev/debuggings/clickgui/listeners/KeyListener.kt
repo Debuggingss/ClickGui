@@ -8,7 +8,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.elementa.events.UIClickEvent
-import org.lwjgl.input.Keyboard
+import gg.essential.universal.UKeyboard
 
 open class KeyListener<T>(
     name: String,
@@ -18,7 +18,7 @@ open class KeyListener<T>(
 
     private var keyInputMode: Boolean = false
 
-    var boundKey: Int = Keyboard.KEY_NONE
+    var boundKey: Int = UKeyboard.KEY_NONE
     var keyPressed: Boolean = false
 
     val boundKeyText: UIText = UIText("NONE").constrain {
@@ -35,8 +35,8 @@ open class KeyListener<T>(
             return
         }
         else if (event.mouseButton == 1) {
-            boundKey = Keyboard.KEY_NONE
-            boundKeyText.setText(Keyboard.getKeyName(boundKey))
+            boundKey = UKeyboard.KEY_NONE
+            boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
             saveKeybind()
         }
     }
@@ -51,13 +51,13 @@ open class KeyListener<T>(
     fun captureKeyPress() {
         clickGui?.window?.onKeyType { _, keyCode ->
             if (!keyInputMode) return@onKeyType
-            if (keyCode == Keyboard.KEY_LSHIFT) return@onKeyType
-            if (keyCode != Keyboard.KEY_ESCAPE) {
+            if (keyCode == UKeyboard.KEY_LSHIFT) return@onKeyType
+            if (keyCode != UKeyboard.KEY_ESCAPE) {
                 boundKey = keyCode
                 saveKeybind()
             }
             keyInputMode = false
-            boundKeyText.setText(Keyboard.getKeyName(boundKey))
+            boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
         }
     }
 }
