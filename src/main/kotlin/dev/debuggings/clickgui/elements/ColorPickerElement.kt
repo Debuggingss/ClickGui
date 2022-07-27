@@ -17,18 +17,18 @@ import java.awt.Color
 class ColorPickerElement(
     private val name: String,
     private val defaultValue: Color
-) : Element<Color>(defaultValue) {
+) : Element<Color>(name, defaultValue) {
 
     override fun loadValue() {
         value = Utils.hexToColor(
-            clickGui!!.config.get("${section?.name}.$name") ?: Utils.colorToHex(defaultValue)
+            clickGui!!.config.get(savePath) ?: Utils.colorToHex(defaultValue)
         )
         textInput.setText(Utils.colorToHex(value))
         colorRectangle.setColor(value)
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<String>("${section?.name}.$name", Utils.colorToHex(value))
+        clickGui!!.config.set<String>(savePath, Utils.colorToHex(value))
         clickGui!!.config.save()
     }
 

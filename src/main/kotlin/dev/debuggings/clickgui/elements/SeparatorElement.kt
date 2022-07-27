@@ -8,7 +8,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.elementa.effects.ScissorEffect
 
-class SeparatorElement(name: String) : Element<String>("what the fuck did you expect?") {
+class SeparatorElement(name: String) : Element<String>(name, "what the fuck did you expect?") {
 
     init {
         constrain {

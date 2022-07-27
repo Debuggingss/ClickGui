@@ -6,10 +6,13 @@ import dev.debuggings.clickgui.Section
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIText
 
-open class Element<T>(var value: T) : UIBlock(Colors.OFF) {
+open class Element<T>(var elementName: String, var value: T) : UIBlock(Colors.OFF) {
 
     var clickGui: ClickGui? = null
     var section: Section? = null
+
+    var savePath: String = ""
+
     open var nameText: UIText? = null
 
     open fun loadValue() {}

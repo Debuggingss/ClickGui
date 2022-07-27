@@ -40,7 +40,7 @@ open class ClickGui(val config: FileConfig, val color: Color? = null) : WindowSc
         return section
     }
 
-    // dsl api
+    // --- DSL API ---
 
     fun section(name: String, builder: SectionBuilder<Section>.() -> Unit) {
         val sectionBuilder = SectionBuilder<Section>()

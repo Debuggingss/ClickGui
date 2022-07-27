@@ -15,13 +15,21 @@ class TestClickGui {
 
     private val section = Section("Section") sectionOf clickGui
 
-    private val subSection = SubSection(
+    private val subSection2 = SubSection(
         "Sub Section",
         defaultValue = true,
         saveState = true,
         allowBinding = true,
         toggleFunctionality = true
     ) subSectionOf section
+
+    private val subSection = SubSection(
+        "Sub Section 2",
+        defaultValue = true,
+        saveState = true,
+        allowBinding = true,
+        toggleFunctionality = true
+    ) subSectionOf subSection2
 
     val button = ButtonElement(
         "Button",

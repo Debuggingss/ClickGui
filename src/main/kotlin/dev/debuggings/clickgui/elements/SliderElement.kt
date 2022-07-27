@@ -17,18 +17,18 @@ class SliderElement(
     private val minValue: Int,
     private val maxValue: Int,
     private val defaultValue: Int
-) : Element<Int>(defaultValue) {
+) : Element<Int>(name, defaultValue) {
 
     private var isDragging: Boolean = false
 
     override fun loadValue() {
-        value = clickGui!!.config.get<Int>("${section?.name}.$name") ?: defaultValue
+        value = clickGui!!.config.get<Int>(savePath) ?: defaultValue
         sliderBox.setX(((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel())
         valueText.setText(value.toString())
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<Int>("${section?.name}.$name", value)
+        clickGui!!.config.set<Int>(savePath, value)
         clickGui!!.config.save()
     }
 

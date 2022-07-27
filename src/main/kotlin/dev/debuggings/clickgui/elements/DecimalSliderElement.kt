@@ -18,18 +18,18 @@ class DecimalSliderElement(
     private val minValue: Float,
     private val maxValue: Float,
     private val defaultValue: Float
-) : Element<Float>(defaultValue) {
+) : Element<Float>(name, defaultValue) {
 
     private var isDragging: Boolean = false
 
     override fun loadValue() {
-        value = clickGui!!.config.get<Double>("${section?.name}.$name")?.toFloat() ?: defaultValue
+        value = clickGui!!.config.get<Double>(savePath)?.toFloat() ?: defaultValue
         sliderBox.setX(((90F / (maxValue - minValue)) * (value - minValue) + 3).pixel())
         valueText.setText(value.toString())
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<Double>("${section?.name}.$name", value.toDouble())
+        clickGui!!.config.set<Double>(savePath, value.toDouble())
         clickGui!!.config.save()
     }
 

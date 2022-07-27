@@ -2,6 +2,7 @@ package dev.debuggings.clickgui.elements
 
 import dev.debuggings.clickgui.Colors
 import dev.debuggings.clickgui.Section
+import dev.debuggings.clickgui.Utils.configName
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
@@ -18,7 +19,7 @@ class SubSection(
     private val saveState: Boolean = true,
     private val allowBinding: Boolean = false,
     private val toggleFunctionality: Boolean = true
-) : Element<Boolean>(defaultValue) {
+) : Element<Boolean>(name, defaultValue) {
 
     var subSection: SubSection? = null
 
@@ -31,17 +32,17 @@ class SubSection(
 
     override fun loadValue() {
         if (toggleFunctionality) {
-            value = clickGui!!.config.get<Boolean>("${section?.name}.$name.value") ?: defaultValue
+            value = clickGui!!.config.get<Boolean>("$savePath.value") ?: defaultValue
         }
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.${section?.name}.$name") ?: Keyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("keys.$savePath.key") ?: Keyboard.KEY_NONE
             boundKeyText.setText(Keyboard.getKeyName(boundKey))
         }
     }
 
     override fun saveValue() {
         if (toggleFunctionality && saveState) {
-            clickGui!!.config.set<Boolean>("${section?.name}.$name.value", value)
+            clickGui!!.config.set<Boolean>("$savePath.value", value)
         }
 
         clickGui!!.config.save()
@@ -49,7 +50,7 @@ class SubSection(
 
     private fun saveKeybind() {
         if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.${section?.name}.$name", boundKey)
+            clickGui!!.config.set<Int>("keys.$savePath.key", boundKey)
             clickGui!!.config.save()
         }
     }
@@ -57,6 +58,7 @@ class SubSection(
     fun addElement(element: Element<*>): Element<*> {
         element.clickGui = section?.clickGui
         element.section = section
+        element.savePath = "$savePath.${element.elementName}".configName
         elements.add(element)
         this.addChild(element)
 

@@ -12,16 +12,16 @@ import gg.essential.elementa.effects.ScissorEffect
 class SecureToggleElement(
     private val name: String,
     private val defaultValue: Boolean = false
-) : Element<Boolean>(defaultValue) {
+) : Element<Boolean>(name, defaultValue) {
 
     private var clicks: Int = 0
 
     override fun loadValue() {
-        value = clickGui!!.config.get<Boolean>("${section?.name}.$name") ?: defaultValue
+        value = clickGui!!.config.get<Boolean>(savePath) ?: defaultValue
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<Boolean>("${section?.name}.$name", value)
+        clickGui!!.config.set<Boolean>(savePath, value)
         clickGui!!.config.save()
     }
 

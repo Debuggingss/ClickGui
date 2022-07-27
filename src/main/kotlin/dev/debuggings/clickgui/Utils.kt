@@ -4,6 +4,9 @@ import java.awt.Color
 
 object Utils {
 
+    val String.configName: String
+        get() = this.replace(" ", "_").lowercase()
+
     fun map(number: Int, in_min: Int, in_max: Int, out_min: Int, out_max: Int): Int {
         return (number - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     }

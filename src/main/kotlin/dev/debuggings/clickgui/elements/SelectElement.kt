@@ -13,18 +13,18 @@ class SelectElement(
     private val name: String,
     private val defaultValue: String,
     private val options: ArrayList<String>
-) : Element<String>(defaultValue) {
+) : Element<String>(name, defaultValue) {
 
     private var selectedOption: Int = 0
 
     override fun loadValue() {
-        value = clickGui!!.config.get<String>("${section?.name}.$name") ?: defaultValue
+        value = clickGui!!.config.get<String>(savePath) ?: defaultValue
         selectedOption = options.indexOf(defaultValue)
         valueText.setText(value)
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<String>("${section?.name}.$name", value)
+        clickGui!!.config.set<String>(savePath, value)
         clickGui!!.config.save()
     }
 

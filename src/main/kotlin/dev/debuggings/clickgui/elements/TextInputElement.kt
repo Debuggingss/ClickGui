@@ -14,15 +14,15 @@ import gg.essential.elementa.effects.ScissorEffect
 class TextInputElement(
     private val name: String,
     private val defaultValue: String
-) : Element<String>(defaultValue) {
+) : Element<String>(name, defaultValue) {
 
     override fun loadValue() {
-        value = clickGui!!.config.get<String>("${section?.name}.$name") ?: defaultValue
+        value = clickGui!!.config.get<String>(savePath) ?: defaultValue
         textInput.setText(value)
     }
 
     override fun saveValue() {
-        clickGui!!.config.set<String>("${section?.name}.$name", value)
+        clickGui!!.config.set<String>(savePath, value)
         clickGui!!.config.save()
     }
 

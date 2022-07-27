@@ -24,16 +24,17 @@ class ColorHandler(private val clickGui: ClickGui, private val color: Color? = n
         clickGui.sections.forEach {
             it.elements.forEachIndexed { index, element ->
                 handle(index, element)
-
-                if (element is SubSection) {
-                    element.elements.forEachIndexed(::handle)
-                }
             }
         }
     }
 
     private fun handle(index: Int, element: Element<*>) {
         if (element is SeparatorElement) return
+
+        if (element is SubSection && element.elements.size > 0) {
+            element.elements.forEachIndexed(::handle)
+        }
+
         var clr = Color.getHSBColor(colorRGB + (index / 75F), 1F, 1F)
 
         if (color != null) clr = color

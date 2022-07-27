@@ -21,17 +21,15 @@ class KeyBindHandler(private val clickGui: ClickGui) {
         clickGui.sections.forEach { section ->
             section.elements.forEach innerLoop@ { element ->
                 handle(element)
-
-                if (element is SubSection) {
-                    element.elements.forEach {
-                        handle(it)
-                    }
-                }
             }
         }
     }
 
     private fun handle(element: Element<*>) {
+        if (element is SubSection && element.elements.size > 0) {
+            element.elements.forEach(::handle)
+        }
+
         when (element) {
             is ToggleElement -> {
                 if (element.boundKey == Keyboard.KEY_NONE) return

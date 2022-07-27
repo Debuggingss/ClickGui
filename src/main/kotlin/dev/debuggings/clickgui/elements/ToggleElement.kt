@@ -15,7 +15,7 @@ class ToggleElement(
     private val defaultValue: Boolean = false,
     private val saveState: Boolean = true,
     private val allowBinding: Boolean = false
-) : Element<Boolean>(defaultValue) {
+) : Element<Boolean>(name, defaultValue) {
 
     var boundKey: Int = Keyboard.KEY_NONE
     var keyPressed: Boolean = false
@@ -23,22 +23,22 @@ class ToggleElement(
     private var keyInputMode: Boolean = false
 
     override fun loadValue() {
-        value = clickGui!!.config.get<Boolean>("${section?.name}.$name") ?: defaultValue
+        value = clickGui!!.config.get<Boolean>(savePath) ?: defaultValue
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.${section?.name}.$name") ?: Keyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: Keyboard.KEY_NONE
             boundKeyText.setText(Keyboard.getKeyName(boundKey))
         }
     }
 
     override fun saveValue() {
         if (!saveState) return
-        clickGui!!.config.set<Boolean>("${section?.name}.$name", value)
+        clickGui!!.config.set<Boolean>(savePath, value)
         clickGui!!.config.save()
     }
 
     private fun saveKeybind() {
         if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.${section?.name}.$name", boundKey)
+            clickGui!!.config.set<Int>("keys.$savePath", boundKey)
             clickGui!!.config.save()
         }
     }

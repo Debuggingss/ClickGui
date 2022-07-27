@@ -11,10 +11,10 @@ import gg.essential.elementa.effects.ScissorEffect
 import org.lwjgl.input.Keyboard
 
 class ButtonElement(
-    private val name: String,
+    name: String,
     private val allowBinding: Boolean = false,
     val function: () -> Unit
-) : Element<String>("null") {
+) : Element<String>(name, "null") {
 
     var boundKey: Int = Keyboard.KEY_NONE
     var keyPressed: Boolean = false
@@ -23,14 +23,14 @@ class ButtonElement(
 
     override fun loadValue() {
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.${section?.name}.$name") ?: Keyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: Keyboard.KEY_NONE
             boundKeyText.setText(Keyboard.getKeyName(boundKey))
         }
     }
 
     private fun saveKeybind() {
         if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.${section?.name}.$name", boundKey)
+            clickGui!!.config.set<Int>("keys.$savePath", boundKey)
             clickGui!!.config.save()
         }
     }

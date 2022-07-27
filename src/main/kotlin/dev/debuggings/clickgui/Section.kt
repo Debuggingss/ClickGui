@@ -1,5 +1,6 @@
 package dev.debuggings.clickgui
 
+import dev.debuggings.clickgui.Utils.configName
 import dev.debuggings.clickgui.elements.Element
 import dev.debuggings.clickgui.elements.SubSection
 import gg.essential.elementa.components.UIBlock
@@ -24,6 +25,7 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
     fun addElement(element: Element<*>): Element<*> {
         element.clickGui = this.clickGui
         element.section = this
+        element.savePath = "$name.${element.elementName}".configName
         elements.add(element)
         this.addChild(element)
 
@@ -74,9 +76,9 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
 
         updatePositions()
 
-        val x = clickGui?.config?.get<Double>("$name.state.X")?.toFloat() ?: getLeft()
-        val y = clickGui?.config?.get<Double>("$name.state.Y")?.toFloat() ?: getTop()
-        val collapsed = clickGui?.config?.get<Boolean>("$name.state.collapsed") ?: true
+        val x = clickGui?.config?.get<Double>("$name.state.x".configName)?.toFloat() ?: getLeft()
+        val y = clickGui?.config?.get<Double>("$name.state.y".configName)?.toFloat() ?: getTop()
+        val collapsed = clickGui?.config?.get<Boolean>("$name.state.collapsed".configName) ?: true
 
         setX(x.pixel())
         setY(y.pixel())
@@ -101,9 +103,9 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
     }
 
     private fun saveValue() {
-        clickGui!!.config.set<Double>("$name.state.X", getLeft().toDouble())
-        clickGui!!.config.set<Double>("$name.state.Y", getTop().toDouble())
-        clickGui!!.config.set<Boolean>("$name.state.collapsed", getHeight() == 28F)
+        clickGui!!.config.set<Double>("$name.state.x".configName, getLeft().toDouble())
+        clickGui!!.config.set<Double>("$name.state.y".configName, getTop().toDouble())
+        clickGui!!.config.set<Boolean>("$name.state.collapsed".configName, getHeight() == 28F)
         clickGui!!.config.save()
     }
 
