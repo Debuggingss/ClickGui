@@ -40,7 +40,7 @@ class ColorHandler(private val clickGui: ClickGui, private val color: Color? = n
         if (color != null) clr = color
 
         when (element) {
-            is ToggleElement -> if (element.value) {
+            is ToggleElement, is SecureToggleElement -> if (element.value as Boolean) {
                 element.nameText?.setColor(Color(255, 255, 255).toConstraint())
                 element.setColor(clr.toConstraint())
                 return
@@ -48,11 +48,6 @@ class ColorHandler(private val clickGui: ClickGui, private val color: Color? = n
             is SubSection -> if (element.value) {
                 element.nameText?.setColor(Color(255, 255, 255).toConstraint())
                 element.children[0].setColor(clr.toConstraint())
-                return
-            }
-            is SecureToggleElement -> if(element.value) {
-                element.nameText?.setColor(Color(255, 255, 255).toConstraint())
-                element.setColor(clr.toConstraint())
                 return
             }
             is ButtonElement -> if (element.isHovered()) {

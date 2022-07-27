@@ -19,7 +19,7 @@ class KeyBindHandler(private val clickGui: ClickGui) {
         if (mc.thePlayer == null) return
 
         clickGui.sections.forEach { section ->
-            section.elements.forEach innerLoop@ { element ->
+            section.elements.forEach { element ->
                 handle(element)
             }
         }

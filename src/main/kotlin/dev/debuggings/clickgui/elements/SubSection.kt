@@ -3,6 +3,7 @@ package dev.debuggings.clickgui.elements
 import dev.debuggings.clickgui.Colors
 import dev.debuggings.clickgui.Section
 import dev.debuggings.clickgui.Utils.configName
+import dev.debuggings.clickgui.listeners.KeyListener
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
@@ -10,25 +11,19 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 import org.lwjgl.input.Keyboard
 
 class SubSection(
     val name: String,
     private val defaultValue: Boolean = false,
     private val saveState: Boolean = true,
-    private val allowBinding: Boolean = false,
+    allowBinding: Boolean = false,
     private val toggleFunctionality: Boolean = true
-) : Element<Boolean>(name, defaultValue) {
+) : KeyListener<Boolean>(name, defaultValue, allowBinding) {
 
     var subSection: SubSection? = null
 
     val elements = mutableListOf<Element<*>>()
-
-    var boundKey: Int = Keyboard.KEY_NONE
-    var keyPressed: Boolean = false
-
-    private var keyInputMode: Boolean = false
 
     override fun loadValue() {
         if (toggleFunctionality) {
@@ -46,13 +41,6 @@ class SubSection(
         }
 
         clickGui!!.config.save()
-    }
-
-    private fun saveKeybind() {
-        if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.$savePath.key", boundKey)
-            clickGui!!.config.save()
-        }
     }
 
     fun addElement(element: Element<*>): Element<*> {
@@ -131,25 +119,15 @@ class SubSection(
         color = Colors.TITLE_TEXT.toConstraint()
     } childOf titleBar
 
-    private var boundKeyText = UIText("NONE").constrain {
-        x = 5.pixel(true)
-        y = CenterConstraint()
-        textScale = 0.5.pixel()
-        color = Colors.OPTION_TEXT.toConstraint()
-    } childOf titleBar
 
     override fun init() {
         loadValue()
 
         constrain {
-            x = CenterConstraint()
-            y = CenterConstraint()
-            width = 100.pixel()
-            height = 20.pixel()
             color = Colors.BACKGROUND.toConstraint()
-
-            enableEffect(ScissorEffect())
         }
+
+        boundKeyText childOf titleBar
 
         if (!allowBinding) {
             boundKeyText.setText("")
@@ -163,16 +141,7 @@ class SubSection(
 
         titleBar.onMouseClick { event ->
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && allowBinding && toggleFunctionality) {
-                if (event.mouseButton == 0) {
-                    keyInputMode = true
-                    boundKeyText.setText("Waiting...")
-                    return@onMouseClick
-                }
-                else if (event.mouseButton == 1) {
-                    boundKey = Keyboard.KEY_NONE
-                    boundKeyText.setText(Keyboard.getKeyName(boundKey))
-                    saveKeybind()
-                }
+                listen(event)
             } else {
                 if (toggleFunctionality && event.mouseButton == 0) {
                     value = !value
@@ -185,16 +154,7 @@ class SubSection(
         }
 
         if (toggleFunctionality && allowBinding) {
-            clickGui?.window?.onKeyType { _, keyCode ->
-                if (!keyInputMode) return@onKeyType
-                if (keyCode == Keyboard.KEY_LSHIFT) return@onKeyType
-                if (keyCode != Keyboard.KEY_ESCAPE) {
-                    boundKey = keyCode
-                    saveKeybind()
-                }
-                keyInputMode = false
-                boundKeyText.setText(Keyboard.getKeyName(boundKey))
-            }
+            captureKeyPress()
         }
     }
 

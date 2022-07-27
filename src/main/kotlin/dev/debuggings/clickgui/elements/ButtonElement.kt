@@ -1,37 +1,25 @@
 package dev.debuggings.clickgui.elements
 
 import dev.debuggings.clickgui.Colors
+import dev.debuggings.clickgui.listeners.KeyListener
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 import org.lwjgl.input.Keyboard
 
 class ButtonElement(
     name: String,
-    private val allowBinding: Boolean = false,
+    allowBinding: Boolean = false,
     val function: () -> Unit
-) : Element<String>(name, "null") {
-
-    var boundKey: Int = Keyboard.KEY_NONE
-    var keyPressed: Boolean = false
-
-    private var keyInputMode: Boolean = false
+) : KeyListener<String>(name, "null", allowBinding) {
 
     override fun loadValue() {
         if (allowBinding) {
             boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: Keyboard.KEY_NONE
             boundKeyText.setText(Keyboard.getKeyName(boundKey))
-        }
-    }
-
-    private fun saveKeybind() {
-        if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.$savePath", boundKey)
-            clickGui!!.config.save()
         }
     }
 
@@ -42,24 +30,10 @@ class ButtonElement(
         color = Colors.OPTION_TEXT.toConstraint()
     } childOf this
 
-    private var boundKeyText = UIText("NONE").constrain {
-        x = 5.pixel(true)
-        y = CenterConstraint()
-        textScale = 0.5.pixel()
-        color = Colors.OPTION_TEXT.toConstraint()
-    } childOf this
-
     override fun init() {
         loadValue()
 
-        constrain {
-            x = 0.pixel()
-            y = 0.pixel()
-            width = 100.pixel()
-            height = 20.pixel()
-
-            enableEffect(ScissorEffect())
-        }
+        boundKeyText childOf this
 
         if (!allowBinding) {
             boundKeyText.setText("")
@@ -67,32 +41,14 @@ class ButtonElement(
 
         onMouseClick { event ->
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && allowBinding) {
-                if (event.mouseButton == 0) {
-                    keyInputMode = true
-                    boundKeyText.setText("Waiting...")
-                    return@onMouseClick
-                }
-                else if (event.mouseButton == 1) {
-                    boundKey = Keyboard.KEY_NONE
-                    boundKeyText.setText(Keyboard.getKeyName(boundKey))
-                    saveKeybind()
-                }
+                listen(event)
             } else {
                 function()
             }
         }
 
         if (allowBinding) {
-            clickGui?.window?.onKeyType { _, keyCode ->
-                if (!keyInputMode) return@onKeyType
-                if (keyCode == Keyboard.KEY_LSHIFT) return@onKeyType
-                if (keyCode != Keyboard.KEY_ESCAPE) {
-                    boundKey = keyCode
-                    saveKeybind()
-                }
-                keyInputMode = false
-                boundKeyText.setText(Keyboard.getKeyName(boundKey))
-            }
+            captureKeyPress()
         }
     }
 }
