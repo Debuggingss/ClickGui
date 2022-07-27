@@ -7,7 +7,6 @@ import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
-import gg.essential.elementa.effects.ScissorEffect
 
 class SelectElement(
     private val name: String,
@@ -56,15 +55,6 @@ class SelectElement(
 
     override fun init() {
         loadValue()
-
-        constrain {
-            x = 0.pixel()
-            y = 0.pixel()
-            width = 100.pixel()
-            height = 20.pixel()
-
-            enableEffect(ScissorEffect())
-        }
 
         leftIconText.hide()
         rightIconText.hide()

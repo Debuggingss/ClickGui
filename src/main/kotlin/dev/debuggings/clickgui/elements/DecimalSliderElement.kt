@@ -79,15 +79,6 @@ class DecimalSliderElement(
     override fun init() {
         loadValue()
 
-        constrain {
-            x = 0.pixel()
-            y = 0.pixel()
-            width = 100.pixel()
-            height = 20.pixel()
-
-            enableEffect(ScissorEffect())
-        }
-
         sliderBar.hide()
         sliderBox.hide()
         sliderMinText.hide()
