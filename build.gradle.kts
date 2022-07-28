@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("gg.essential:essential-$platform:2666")
+    compileOnly("gg.essential:essential-$platform:4167+g4594ad6e6")
     embed("gg.essential:loader-launchwrapper:1.1.3")
     embed("com.electronwill.night-config:toml:3.6.5")
 }
@@ -42,12 +42,7 @@ tasks.jar {
     })
 
     exclude("com/example/examplemod/**")
-
-    manifest.attributes(mapOf(
-        "ModSide" to "CLIENT",
-        "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
-        "TweakOrder" to "0",
-    ))
+    exclude("gg/essential/**")
 }
 
 publishing {
