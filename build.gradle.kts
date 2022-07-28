@@ -4,6 +4,7 @@ plugins {
     id("gg.essential.multi-version")
     id("gg.essential.loom")
     id("gg.essential.defaults")
+    id("com.github.johnrengelman.shadow")
 }
 
 group = "dev.debuggings"
@@ -36,13 +37,17 @@ dependencies {
     embed("com.electronwill.night-config:toml:3.6.5")
 }
 
-tasks.jar {
-    from(embed.files.map {
-        zipTree(it)
-    })
+tasks {
+    shadowJar {
+        configurations = listOf(embed)
+        exclude("com/example/examplemod/**")
+        exclude("gg/essential/**")
+        relocate("com.electronwill.nightconfig", "dev.debuggings.clickgui.impl.nightconfig")
+    }
 
-    exclude("com/example/examplemod/**")
-    exclude("gg/essential/**")
+    remapJar {
+        input.set(shadowJar.get().archiveFile)
+    }
 }
 
 publishing {

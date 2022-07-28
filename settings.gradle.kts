@@ -12,6 +12,7 @@ pluginManagement {
         val egtVersion = "0.1.11"
         id("gg.essential.loom") version "0.10.0.2"
         id("gg.essential.multi-version.root") version egtVersion
+        id("com.github.johnrengelman.shadow") version "7.0.0"
     }
 }
 
