@@ -41,6 +41,8 @@ class ToggleElement(
     override fun init() {
         loadValue()
 
+        boundKeyText childOf this
+
         if (!allowBinding) {
             boundKeyText.setText("")
         }

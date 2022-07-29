@@ -2,6 +2,7 @@ package dev.debuggings.clickgui.listeners
 
 import dev.debuggings.clickgui.Colors
 import dev.debuggings.clickgui.elements.Element
+import dev.debuggings.clickgui.elements.SubSection
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.constrain
@@ -33,8 +34,7 @@ open class KeyListener<T>(
             keyInputMode = true
             boundKeyText.setText("Waiting...")
             return
-        }
-        else if (event.mouseButton == 1) {
+        } else if (event.mouseButton == 1) {
             boundKey = UKeyboard.KEY_NONE
             boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
             saveKeybind()
@@ -43,7 +43,14 @@ open class KeyListener<T>(
 
     fun saveKeybind() {
         if (allowBinding) {
-            clickGui!!.config.set<Int>("keys.$savePath.key", boundKey)
+            clickGui!!.config.set<Int>(
+                if (this is SubSection) {
+                    "keys.$savePath.key"
+                } else {
+                    "keys.$savePath"
+                },
+                boundKey
+            )
             clickGui!!.config.save()
         }
     }
