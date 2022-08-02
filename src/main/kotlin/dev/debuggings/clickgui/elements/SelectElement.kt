@@ -89,6 +89,9 @@ class SelectElement(
     }
 
     private fun cycleText() {
+        if (selectedOption < 0) {
+            selectedOption = options.size - 1
+        }
         selectedOption %= options.size
         value = options[selectedOption]
         valueText.setText(value)
