@@ -76,9 +76,9 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
 
         updatePositions()
 
-        val x = clickGui?.config?.get<Double>("$name.state.x".configName)?.toFloat() ?: getLeft()
-        val y = clickGui?.config?.get<Double>("$name.state.y".configName)?.toFloat() ?: getTop()
-        val collapsed = clickGui?.config?.get<Boolean>("$name.state.collapsed".configName) ?: true
+        val x = clickGui?.config?.get<Double>("$name._state_.x".configName)?.toFloat() ?: getLeft()
+        val y = clickGui?.config?.get<Double>("$name._state_.y".configName)?.toFloat() ?: getTop()
+        val collapsed = clickGui?.config?.get<Boolean>("$name._state_.collapsed".configName) ?: true
 
         setX(x.pixel())
         setY(y.pixel())
@@ -103,9 +103,9 @@ class Section(val name: String) : UIRoundedRectangle(4F) {
     }
 
     private fun saveValue() {
-        clickGui!!.config.set<Double>("$name.state.x".configName, getLeft().toDouble())
-        clickGui!!.config.set<Double>("$name.state.y".configName, getTop().toDouble())
-        clickGui!!.config.set<Boolean>("$name.state.collapsed".configName, getHeight() == 28F)
+        clickGui!!.config.set<Double>("$name._state_.x".configName, getLeft().toDouble())
+        clickGui!!.config.set<Double>("$name._state_.y".configName, getTop().toDouble())
+        clickGui!!.config.set<Boolean>("$name._state_.collapsed".configName, getHeight() == 28F)
         clickGui!!.config.save()
     }
 

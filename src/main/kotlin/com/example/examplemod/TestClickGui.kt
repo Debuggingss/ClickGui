@@ -1,6 +1,5 @@
 package com.example.examplemod
 
-import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.ClickGui
 import dev.debuggings.clickgui.Section
 import dev.debuggings.clickgui.elements.*
@@ -10,7 +9,7 @@ import java.awt.Color
 class TestClickGui {
 
     val clickGui = ClickGui(
-        FileConfig.of("./config/testclickgui.toml"),
+        "./config/testclickgui.toml",
     )
 
     private val section = Section("Section") sectionOf clickGui

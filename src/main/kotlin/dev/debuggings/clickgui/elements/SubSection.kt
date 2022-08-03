@@ -27,17 +27,17 @@ class SubSection(
 
     override fun loadValue() {
         if (toggleFunctionality) {
-            value = clickGui!!.config.get<Boolean>("$savePath.value") ?: defaultValue
+            value = clickGui!!.config.get<Boolean>("$savePath._value_") ?: defaultValue
         }
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.$savePath.key") ?: UKeyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("_keys_.$savePath._key_") ?: UKeyboard.KEY_NONE
             boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
         }
     }
 
     override fun saveValue() {
         if (toggleFunctionality && saveState) {
-            clickGui!!.config.set<Boolean>("$savePath.value", value)
+            clickGui!!.config.set<Boolean>("$savePath._value_", value)
         }
 
         clickGui!!.config.save()

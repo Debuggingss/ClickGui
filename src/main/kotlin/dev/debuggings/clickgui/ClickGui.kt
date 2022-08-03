@@ -10,8 +10,9 @@ import gg.essential.elementa.dsl.*
 import net.minecraftforge.common.MinecraftForge
 import java.awt.Color
 
-open class ClickGui(val config: FileConfig, val color: Color? = null) : WindowScreen(ElementaVersion.V1) {
+open class ClickGui(configPath: String, val color: Color? = null) : WindowScreen(ElementaVersion.V1) {
 
+    val config: FileConfig = FileConfig.of(configPath)
     val sections = mutableListOf<Section>()
 
     fun init() {
@@ -30,8 +31,8 @@ open class ClickGui(val config: FileConfig, val color: Color? = null) : WindowSc
         window.addChild(section)
 
         window.children.forEachIndexed { index, comp ->
-            val x = config.get<Double>("${section.name}.state.X") ?: (50 + (index * 30))
-            val y = config.get<Double>("${section.name}.state.Y") ?: 50
+            val x = config.get<Double>("${section.name}._state_.X") ?: (50 + (index * 30))
+            val y = config.get<Double>("${section.name}._state_.Y") ?: 50
 
             comp.setY(x.pixel())
             comp.setX(y.pixel())

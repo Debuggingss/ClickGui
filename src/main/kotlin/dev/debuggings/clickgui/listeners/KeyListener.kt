@@ -45,9 +45,9 @@ open class KeyListener<T>(
         if (allowBinding) {
             clickGui!!.config.set<Int>(
                 if (this is SubSection) {
-                    "keys.$savePath.key"
+                    "_keys_.$savePath._key_"
                 } else {
-                    "keys.$savePath"
+                    "_keys_.$savePath"
                 },
                 boundKey
             )

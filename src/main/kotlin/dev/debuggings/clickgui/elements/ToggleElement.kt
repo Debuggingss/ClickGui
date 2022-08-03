@@ -20,7 +20,7 @@ class ToggleElement(
     override fun loadValue() {
         value = clickGui!!.config.get<Boolean>(savePath) ?: defaultValue
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: UKeyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("_keys_.$savePath") ?: UKeyboard.KEY_NONE
             boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
         }
     }

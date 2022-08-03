@@ -1,12 +1,11 @@
 package com.example.examplemod
 
-import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.ClickGui
 import dev.debuggings.clickgui.elements.SecureToggleElement
 import gg.essential.universal.UChat
 import java.awt.Color
 
-object TestDslClickGui : ClickGui(FileConfig.of("./config/testclickgui_dsl.toml")) {
+object TestDslClickGui : ClickGui("./config/testclickgui_dsl.toml") {
 
     private lateinit var secureToggle: SecureToggleElement
 

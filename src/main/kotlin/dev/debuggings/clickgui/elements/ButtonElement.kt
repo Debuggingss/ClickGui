@@ -18,7 +18,7 @@ class ButtonElement(
 
     override fun loadValue() {
         if (allowBinding) {
-            boundKey = clickGui!!.config.get<Int>("keys.$savePath") ?: UKeyboard.KEY_NONE
+            boundKey = clickGui!!.config.get<Int>("_keys_.$savePath") ?: UKeyboard.KEY_NONE
             boundKeyText.setText(UKeyboard.getKeyName(boundKey)!!)
         }
     }
