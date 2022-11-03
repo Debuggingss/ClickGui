@@ -10,7 +10,13 @@ import gg.essential.elementa.dsl.*
 import net.minecraftforge.common.MinecraftForge
 import java.awt.Color
 
-open class ClickGui(configPath: String, val color: Color? = null) : WindowScreen(ElementaVersion.V1) {
+open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(ElementaVersion.V1) {
+    private lateinit var colorHandler: ColorHandler
+    var color = color
+        set(value) {
+            colorHandler.color = value
+            field = value
+        }
 
     val config: FileConfig = FileConfig.of(configPath)
     val sections = mutableListOf<Section>()
@@ -21,7 +27,8 @@ open class ClickGui(configPath: String, val color: Color? = null) : WindowScreen
             it.init()
         }
 
-        MinecraftForge.EVENT_BUS.register(ColorHandler(this, color))
+        colorHandler = ColorHandler(this, color)
+        MinecraftForge.EVENT_BUS.register(colorHandler)
         MinecraftForge.EVENT_BUS.register(KeyBindHandler(this))
     }
 

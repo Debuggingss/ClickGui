@@ -6,7 +6,7 @@ import dev.debuggings.clickgui.elements.*
 import gg.essential.universal.UChat
 import java.awt.Color
 
-class TestClickGui {
+object TestClickGui {
 
     val clickGui = ClickGui(
         "./config/testclickgui.toml",
@@ -75,7 +75,7 @@ class TestClickGui {
     ) elementOf subSection2
 
     val toggle = ToggleElement(
-        "Toggle",
+        "Toggle Chroma",
         defaultValue = true,
         saveState = true,
         allowBinding = true,

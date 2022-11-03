@@ -9,9 +9,7 @@ class TestCommand : Command("clickguidebug") {
 
     @DefaultHandler
     fun handle() {
-        val gui = TestClickGui()
-        gui.clickGui.init()
-        EssentialAPI.getGuiUtil().openScreen(gui.clickGui)
+        EssentialAPI.getGuiUtil().openScreen(TestClickGui.clickGui)
     }
 
     @SubCommand("dsl")

@@ -18,6 +18,16 @@ class ExampleMod {
 
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
+        TestClickGui.clickGui.init()
+
+        TestClickGui.toggle.onChange { newVal ->
+            TestClickGui.clickGui.color = if (newVal) {
+                null
+            } else {
+                TestClickGui.color.value
+            }
+        }
+
         TestCommand().register()
     }
 }

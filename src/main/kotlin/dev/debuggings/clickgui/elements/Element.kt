@@ -10,7 +10,14 @@ import gg.essential.elementa.dsl.effect
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.effects.ScissorEffect
 
-open class Element<T>(var elementName: String, var value: T) : UIBlock(Colors.OFF) {
+open class Element<T>(var elementName: String, value: T) : UIBlock(Colors.OFF) {
+    var value: T = value
+        set(value) {
+            listener(value)
+            field = value
+        }
+
+    private var listener: (T) -> Unit = { }
 
     var clickGui: ClickGui? = null
     var section: Section? = null
@@ -26,6 +33,13 @@ open class Element<T>(var elementName: String, var value: T) : UIBlock(Colors.OF
             width = 100.pixel()
             height = 20.pixel()
         } effect ScissorEffect()
+    }
+
+    /**
+     * Runs callback whenever the value changes with its new value
+     */
+    fun onChange(callback: (T) -> Unit) {
+        listener = callback
     }
 
     open fun loadValue() {}

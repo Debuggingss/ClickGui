@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import java.awt.Color
 
-class ColorHandler(private val clickGui: ClickGui, private val color: Color? = null) {
+class ColorHandler(private val clickGui: ClickGui, internal var color: Color? = null) {
 
     private val mc = UMinecraft.getMinecraft()
     private var colorRGB = 0F
