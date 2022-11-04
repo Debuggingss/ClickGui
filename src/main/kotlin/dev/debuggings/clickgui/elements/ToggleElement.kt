@@ -14,8 +14,9 @@ class ToggleElement(
     val name: String,
     val defaultValue: Boolean = false,
     private val saveState: Boolean = true,
-    allowBinding: Boolean = false
-) : KeyListener<Boolean>(name, defaultValue, allowBinding) {
+    allowBinding: Boolean = false,
+    override var description: String? = null,
+) : KeyListener<Boolean>(name, defaultValue, allowBinding, description) {
 
     override fun loadValue() {
         value = clickGui!!.config.get<Boolean>(savePath) ?: defaultValue

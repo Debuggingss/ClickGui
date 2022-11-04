@@ -32,7 +32,8 @@ object TestClickGui {
 
     val button = ButtonElement(
         "Button",
-        allowBinding = true
+        allowBinding = true,
+        description = "ok ".repeat(150)
     ) {
         UChat.chat("I should work, if not, I don't.")
     } elementOf subSection2
@@ -46,7 +47,8 @@ object TestClickGui {
         "Decimal Slider",
         0.1F,
         10F,
-        2F
+        2F,
+        description = "hello ".repeat(50)
     ) elementOf subSection2
 
     val secureToggle = SecureToggleElement(
@@ -74,10 +76,13 @@ object TestClickGui {
         "I am a text input"
     ) elementOf subSection2
 
+    private val section2 = Section("Other Section") sectionOf clickGui
+
     val toggle = ToggleElement(
         "Toggle Chroma",
         defaultValue = true,
         saveState = true,
         allowBinding = true,
-    ) elementOf subSection2
+        description = "This toggles the RGB bullshit."
+    ) elementOf section2
 }

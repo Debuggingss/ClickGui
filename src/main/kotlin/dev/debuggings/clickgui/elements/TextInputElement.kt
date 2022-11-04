@@ -12,8 +12,9 @@ import gg.essential.elementa.dsl.toConstraint
 
 class TextInputElement(
     name: String,
-    private val defaultValue: String
-) : Element<String>(name, defaultValue) {
+    private val defaultValue: String,
+    override var description: String? = null,
+) : Element<String>(name, defaultValue, description) {
 
     override fun loadValue() {
         value = clickGui!!.config.get<String>(savePath) ?: defaultValue

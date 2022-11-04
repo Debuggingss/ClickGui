@@ -11,8 +11,9 @@ import gg.essential.elementa.dsl.toConstraint
 class SelectElement(
     name: String,
     private val defaultValue: String,
-    private val options: ArrayList<String>
-) : Element<String>(name, defaultValue) {
+    private val options: ArrayList<String>,
+    override var description: String? = null,
+) : Element<String>(name, defaultValue, description) {
 
     private var selectedOption: Int = 0
 

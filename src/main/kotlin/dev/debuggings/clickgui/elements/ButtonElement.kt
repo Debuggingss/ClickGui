@@ -13,6 +13,7 @@ import gg.essential.universal.UKeyboard
 class ButtonElement(
     name: String,
     allowBinding: Boolean = false,
+    override var description: String? = null,
     val function: () -> Unit
 ) : KeyListener<String>(name, "null", allowBinding) {
 

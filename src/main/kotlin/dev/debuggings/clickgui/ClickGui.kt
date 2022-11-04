@@ -3,9 +3,13 @@ package dev.debuggings.clickgui
 import com.electronwill.nightconfig.core.file.FileConfig
 import dev.debuggings.clickgui.elements.*
 import dev.debuggings.clickgui.handlers.ColorHandler
+import dev.debuggings.clickgui.handlers.DescriptionHandler
 import dev.debuggings.clickgui.handlers.KeyBindHandler
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
+import gg.essential.elementa.components.UIBlock
+import gg.essential.elementa.components.UIWrappedText
+import gg.essential.elementa.constraints.ChildBasedSizeConstraint
 import gg.essential.elementa.dsl.*
 import net.minecraftforge.common.MinecraftForge
 import java.awt.Color
@@ -21,6 +25,20 @@ open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(Ele
     val config: FileConfig = FileConfig.of(configPath)
     val sections = mutableListOf<Section>()
 
+    val descBlock = UIBlock(Colors.TITLE).constrain {
+        x = (-200).pixel
+        y = 0.pixel
+        width = 100.pixel
+        height = ChildBasedSizeConstraint() + 8.pixel
+    } childOf window
+
+    val descText: UIWrappedText = UIWrappedText("").constrain {
+        x = 4.pixel
+        y = 4.pixel
+        width = 92.pixel
+        textScale = 0.5.pixel
+    } childOf descBlock
+
     fun init() {
         config.load()
         sections.forEach {
@@ -30,6 +48,9 @@ open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(Ele
         colorHandler = ColorHandler(this, color)
         MinecraftForge.EVENT_BUS.register(colorHandler)
         MinecraftForge.EVENT_BUS.register(KeyBindHandler(this))
+        MinecraftForge.EVENT_BUS.register(DescriptionHandler(this))
+
+        descText.setColor(Colors.TITLE_TEXT.toConstraint())
     }
 
     fun addSection(section: Section): Section {
@@ -75,40 +96,80 @@ open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(Ele
             subsection.apply(builder)
         }
 
-        fun button(name: String, allowBinding: Boolean = false, action: (() -> Unit)): ButtonElement {
-            return addElement(ButtonElement(name, allowBinding, action))
+        fun button(
+            name: String,
+            allowBinding: Boolean = false,
+            description: String? = null,
+            action: (() -> Unit)
+        ): ButtonElement {
+            return addElement(ButtonElement(name, allowBinding, description, action))
         }
 
-        fun colorPicker(name: String, defaultColor: Color): ColorPickerElement {
-            return addElement(ColorPickerElement(name, defaultColor))
+        fun colorPicker(
+            name: String,
+            defaultColor: Color,
+            description: String? = null
+        ): ColorPickerElement {
+            return addElement(ColorPickerElement(name, defaultColor, description))
         }
 
-        fun decimalSlider(name: String, minValue: Float, maxValue: Float, defaultValue: Float): DecimalSliderElement {
-            return addElement(DecimalSliderElement(name, minValue, maxValue, defaultValue))
+        fun decimalSlider(
+            name: String,
+            minValue: Float,
+            maxValue: Float,
+            defaultValue: Float,
+            description: String? = null
+        ): DecimalSliderElement {
+            return addElement(DecimalSliderElement(name, minValue, maxValue, defaultValue, description))
         }
 
-        fun secureToggle(name: String, defaultValue: Boolean = false): SecureToggleElement {
-            return addElement(SecureToggleElement(name, defaultValue))
+        fun secureToggle(
+            name: String,
+            defaultValue: Boolean = false,
+            description: String? = null
+        ): SecureToggleElement {
+            return addElement(SecureToggleElement(name, defaultValue, description))
         }
 
-        fun selector(name: String, defaultValue: String, options: ArrayList<String>): SelectElement {
-            return addElement(SelectElement(name, defaultValue, options))
+        fun selector(
+            name: String,
+            defaultValue: String,
+            options: ArrayList<String>,
+            description: String? = null
+        ): SelectElement {
+            return addElement(SelectElement(name, defaultValue, options, description))
         }
 
         fun divider(name: String): DividerElement {
             return addElement(DividerElement(name))
         }
 
-        fun slider(name: String, minValue: Int, maxValue: Int, defaultValue: Int): SliderElement {
-            return addElement(SliderElement(name, minValue, maxValue, defaultValue))
+        fun slider(
+            name: String,
+            minValue: Int,
+            maxValue: Int,
+            defaultValue: Int,
+            description: String? = null
+        ): SliderElement {
+            return addElement(SliderElement(name, minValue, maxValue, defaultValue, description))
         }
 
-        fun textInput(name: String, defaultValue: String): TextInputElement {
-            return addElement(TextInputElement(name, defaultValue))
+        fun textInput(
+            name: String,
+            defaultValue: String,
+            description: String? = null
+        ): TextInputElement {
+            return addElement(TextInputElement(name, defaultValue, description))
         }
 
-        fun toggle(name: String, defaultValue: Boolean = false, saveState: Boolean = true, allowBinding: Boolean = false): ToggleElement {
-            return addElement(ToggleElement(name, defaultValue, saveState, allowBinding))
+        fun toggle(
+            name: String,
+            defaultValue: Boolean = false,
+            saveState: Boolean = true,
+            allowBinding: Boolean = false,
+            description: String? = null
+        ): ToggleElement {
+            return addElement(ToggleElement(name, defaultValue, saveState, allowBinding, description))
         }
     }
 }

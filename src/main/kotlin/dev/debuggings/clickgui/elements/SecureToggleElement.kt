@@ -10,8 +10,9 @@ import gg.essential.elementa.dsl.toConstraint
 
 class SecureToggleElement(
     name: String,
-    private val defaultValue: Boolean = false
-) : Element<Boolean>(name, defaultValue) {
+    private val defaultValue: Boolean = false,
+    override var description: String? = null,
+) : Element<Boolean>(name, defaultValue, description) {
 
     private var clicks: Int = 0
 

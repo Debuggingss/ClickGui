@@ -15,7 +15,8 @@ open class KeyListener<T>(
     name: String,
     defaultValue: T,
     val allowBinding: Boolean,
-) : Element<T>(name, defaultValue) {
+    override var description: String? = null
+) : Element<T>(name, defaultValue, description) {
 
     private var keyInputMode: Boolean = false
 

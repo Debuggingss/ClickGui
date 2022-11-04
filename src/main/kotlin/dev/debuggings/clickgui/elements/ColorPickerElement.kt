@@ -15,8 +15,9 @@ import java.awt.Color
 
 class ColorPickerElement(
     name: String,
-    private val defaultValue: Color
-) : Element<Color>(name, defaultValue) {
+    private val defaultValue: Color,
+    override var description: String? = null,
+) : Element<Color>(name, defaultValue, description) {
 
     override fun loadValue() {
         value = Utils.hexToColor(

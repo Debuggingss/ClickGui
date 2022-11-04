@@ -16,8 +16,9 @@ class DecimalSliderElement(
     name: String,
     private val minValue: Float,
     private val maxValue: Float,
-    private val defaultValue: Float
-) : Element<Float>(name, defaultValue) {
+    private val defaultValue: Float,
+    override var description: String? = null,
+) : Element<Float>(name, defaultValue, description) {
 
     private var isDragging: Boolean = false
 

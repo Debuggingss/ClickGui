@@ -15,8 +15,9 @@ class SliderElement(
     name: String,
     private val minValue: Int,
     private val maxValue: Int,
-    private val defaultValue: Int
-) : Element<Int>(name, defaultValue) {
+    private val defaultValue: Int,
+    override var description: String? = null,
+) : Element<Int>(name, defaultValue, description) {
 
     private var isDragging: Boolean = false
 

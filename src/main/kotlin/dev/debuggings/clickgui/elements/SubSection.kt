@@ -18,8 +18,9 @@ class SubSection(
     private val defaultValue: Boolean = false,
     private val saveState: Boolean = true,
     allowBinding: Boolean = false,
-    private val toggleFunctionality: Boolean = true
-) : KeyListener<Boolean>(name, defaultValue, allowBinding) {
+    private val toggleFunctionality: Boolean = true,
+    override var description: String? = null,
+) : KeyListener<Boolean>(name, defaultValue, allowBinding, description) {
 
     var subSection: SubSection? = null
 

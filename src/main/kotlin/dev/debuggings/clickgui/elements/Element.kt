@@ -10,7 +10,11 @@ import gg.essential.elementa.dsl.effect
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.effects.ScissorEffect
 
-open class Element<T>(var elementName: String, value: T) : UIBlock(Colors.OFF) {
+open class Element<T>(
+    var elementName: String, value: T,
+    open var description: String? = null
+) : UIBlock(Colors.OFF) {
+
     var value: T = value
         set(value) {
             listener(value)
