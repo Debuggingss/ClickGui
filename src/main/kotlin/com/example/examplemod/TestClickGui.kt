@@ -27,7 +27,8 @@ object TestClickGui {
         defaultValue = true,
         saveState = true,
         allowBinding = true,
-        toggleFunctionality = true
+        toggleFunctionality = true,
+        description = "Sub sections can also have descriptions."
     ) subSectionOf subSection
 
     val button = ButtonElement(

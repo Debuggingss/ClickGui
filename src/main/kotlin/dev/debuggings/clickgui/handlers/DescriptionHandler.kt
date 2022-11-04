@@ -37,13 +37,23 @@ class DescriptionHandler(private val clickGui: ClickGui) {
             element.elements.forEach(::handle)
         }
 
+        if (descriptionShown) return
         if (!element.isHovered()) return
+        if (element is SubSection && !element.children[0].isHovered()) return
+        if (element.parent.getHeight() == 20F || element.section?.getHeight() == 28F) return
+
         val desc = element.description ?: return
         descriptionShown = true
 
         clickGui.descText.setText(desc)
 
-        clickGui.descBlock.setX((element.getRight() + 5).pixel)
+        val x = if (element.getRight() + 105 > clickGui.window.getWidth()) {
+            (element.getLeft() - 105).pixel
+        } else {
+            (element.getRight() + 5).pixel
+        }
+
+        clickGui.descBlock.setX(x)
         clickGui.descBlock.setY(element.getTop().pixel)
         clickGui.descBlock.setFloating(true)
     }
