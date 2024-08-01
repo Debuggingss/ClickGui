@@ -13,7 +13,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.universal.UKeyboard
 
-class SubSection(
+class SubSection @JvmOverloads constructor(
     val name: String,
     private val defaultValue: Boolean = false,
     private val saveState: Boolean = true,

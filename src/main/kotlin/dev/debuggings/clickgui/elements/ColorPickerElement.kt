@@ -13,7 +13,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import java.awt.Color
 
-class ColorPickerElement(
+class ColorPickerElement @JvmOverloads constructor(
     name: String,
     private val defaultValue: Color,
     override var description: String? = null,

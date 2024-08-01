@@ -10,7 +10,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
-class TextInputElement(
+class TextInputElement @JvmOverloads constructor(
     name: String,
     private val defaultValue: String,
     override var description: String? = null,

@@ -8,7 +8,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
-class SelectElement(
+class SelectElement @JvmOverloads constructor(
     name: String,
     private val defaultValue: String,
     private val options: ArrayList<String>,

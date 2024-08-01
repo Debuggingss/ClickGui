@@ -8,7 +8,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
-class SecureToggleElement(
+class SecureToggleElement @JvmOverloads constructor(
     name: String,
     private val defaultValue: Boolean = false,
     override var description: String? = null,
