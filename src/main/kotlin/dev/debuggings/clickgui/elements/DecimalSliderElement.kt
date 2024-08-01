@@ -12,7 +12,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import kotlin.math.floor
 
-class DecimalSliderElement(
+class DecimalSliderElement @JvmOverloads constructor(
     name: String,
     private val minValue: Float,
     private val maxValue: Float,

@@ -10,7 +10,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.universal.UKeyboard
 
-class ButtonElement(
+class ButtonElement @JvmOverloads constructor(
     name: String,
     allowBinding: Boolean = false,
     override var description: String? = null,

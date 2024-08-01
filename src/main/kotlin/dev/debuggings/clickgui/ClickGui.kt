@@ -14,7 +14,7 @@ import gg.essential.elementa.dsl.*
 import net.minecraftforge.common.MinecraftForge
 import java.awt.Color
 
-open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(ElementaVersion.V1) {
+open class ClickGui @JvmOverloads constructor(configPath: String, color: Color? = null) : WindowScreen(ElementaVersion.V1) {
     private lateinit var colorHandler: ColorHandler
     var color = color
         set(value) {
@@ -39,7 +39,7 @@ open class ClickGui(configPath: String, color: Color? = null) : WindowScreen(Ele
         textScale = 0.5.pixel
     } childOf descBlock
 
-    fun init() {
+    open fun init() {
         config.load()
         sections.forEach {
             it.init()

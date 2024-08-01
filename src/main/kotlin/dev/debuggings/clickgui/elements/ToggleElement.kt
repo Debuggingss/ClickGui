@@ -10,7 +10,7 @@ import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 import gg.essential.universal.UKeyboard
 
-class ToggleElement(
+class ToggleElement @JvmOverloads constructor(
     val name: String,
     val defaultValue: Boolean = false,
     private val saveState: Boolean = true,

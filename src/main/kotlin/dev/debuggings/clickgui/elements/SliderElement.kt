@@ -11,7 +11,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
-class SliderElement(
+class SliderElement @JvmOverloads constructor(
     name: String,
     private val minValue: Int,
     private val maxValue: Int,

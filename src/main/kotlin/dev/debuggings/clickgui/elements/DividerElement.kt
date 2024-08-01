@@ -7,7 +7,7 @@ import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixel
 import gg.essential.elementa.dsl.toConstraint
 
-class DividerElement(name: String? = null) : Element<String>("", "") {
+class DividerElement @JvmOverloads constructor(name: String? = null) : Element<String>("", "") {
 
     fun setHeight(height: Number) = constrain {
         this.height = height.pixel()
